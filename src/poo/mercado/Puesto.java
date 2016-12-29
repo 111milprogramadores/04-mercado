@@ -6,6 +6,9 @@
 package poo.mercado;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -72,4 +75,83 @@ public class Puesto {
         this.preciosAlquiler = preciosAlquiler;
     }
     
+    public boolean esTipoYDimension (TipoPuesto tipoPuesto, Dimension dimension) {
+        PrecioAlquiler precioVigente = obtenerPrecioVigente();
+        
+        return precioVigente.getTipoPuesto().equals(tipoPuesto) && precioVigente.getDimension().equals(dimension);
+    }
+    
+    public boolean estaAlquilado () {
+        return estado.esAlquilado();
+    }
+    
+    public boolean estaDisponible () {
+        return estado.esDisponible();
+    }
+
+    public boolean estaDisponibleEnFechas(Date fechaDesde, Date fechaHasta, List<Contrato> contratos) {
+        boolean disponible = true;
+        
+        Calendar desde = Calendar.getInstance();
+        desde.setTime(fechaDesde);
+        
+        Calendar hasta = Calendar.getInstance();
+        hasta.setTime(fechaHasta);
+        
+        Iterator<Contrato> iter = contratos.iterator();
+        while (iter.hasNext()) {
+            Contrato contrato = iter.next();
+            
+            Calendar contratoDesde = Calendar.getInstance();
+            contratoDesde.setTime(contrato.getFechaInicioContrato());
+            
+            Calendar contratoHasta = Calendar.getInstance();
+            contratoHasta.setTime(contrato.getFechaFinContrato());
+            
+            if (!((desde.before(contratoDesde) && hasta.before(contratoDesde)) || (desde.after(contratoHasta) && hasta.after(contratoHasta)))) {
+                disponible = false;
+                break;
+            }
+        }
+        
+        return disponible;
+    }
+    
+    public PrecioAlquiler obtenerPrecioVigente () {
+        PrecioAlquiler vigente = null;
+        
+        // recorremos buscando la mayor fecha menor o igual a hoy
+        Iterator<PrecioAlquiler> iter = preciosAlquiler.iterator();
+        while (iter.hasNext()) {
+            PrecioAlquiler actual = iter.next();
+            
+            // si esta vigente lo retornamos
+            if (actual.estaVigente()) {
+                vigente = actual;
+                break;
+            }
+        }
+        
+        return vigente;
+    }
+
+    /**
+     * Obtenemos la ultima lectura del medidor, suponiendo que se encuentran
+     * ordenadas por fecha de forma ascendente.
+     * 
+     * @return 
+     */
+    public Lectura obtenerUltimaLectura() {
+        Lectura ultima = null;
+        
+        if (lecturas.size() > 0) {
+            ultima = lecturas.get(lecturas.size() - 1);
+        }
+        
+        return ultima;
+    }
+
+    public void alquilar(Estado alquilado) {
+        this.setEstado(alquilado);
+    }
 }

@@ -6,6 +6,7 @@
 package poo.mercado;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -89,6 +90,14 @@ public class PrecioAlquiler {
 
     public void setTipoPuesto(TipoPuesto tipoPuesto) {
         this.tipoPuesto = tipoPuesto;
+    }
+
+    boolean estaVigente() {
+        Calendar hoy = Calendar.getInstance();
+        Calendar vigencia = Calendar.getInstance();
+        vigencia.setTime(fechaVigencia);
+        
+        return vigencia.after(hoy);
     }
     
 }

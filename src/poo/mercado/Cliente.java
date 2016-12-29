@@ -5,7 +5,9 @@
  */
 package poo.mercado;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -81,6 +83,17 @@ public class Cliente {
 
     public void setContratos(List<Contrato> contratos) {
         this.contratos = contratos;
+    }
+
+    public Contrato crearContrato(Puesto puesto, Date fechaDesde, Date fechaHasta, Sesion sesion, int numero) {
+        // creamos el nuevo objeto
+        Contrato contrato = new Contrato(null, fechaHasta, fechaDesde, puesto.obtenerPrecioVigente().getPrecio(), numero, sesion.getEmpleado(), sesion, puesto, puesto.obtenerUltimaLectura());
+        
+        // lo agregamos a la coleccion
+        contratos.add(contrato);
+        
+        // y lo devolvemos
+        return contrato;
     }
     
 }

@@ -45,4 +45,11 @@ public class Estado {
         this.nombre = nombre;
     }
     
+    public boolean esDisponible () {
+        return nombre.equals("Disponible");
+    }
+
+    boolean esAlquilado() {
+        return nombre.equals("Alquilado");
+    }
 }

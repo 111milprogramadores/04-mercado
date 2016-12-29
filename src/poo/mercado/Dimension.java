@@ -56,4 +56,13 @@ public class Dimension {
         this.nombre = nombre;
     }
     
+    public float calcularMetrosCuadrados () {
+        return ancho * largo;
+    }
+
+    @Override
+    public String toString() {
+        return "" + calcularMetrosCuadrados();
+    }
+    
 }

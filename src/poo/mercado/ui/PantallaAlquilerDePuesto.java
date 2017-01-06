@@ -5,6 +5,7 @@
  */
 package poo.mercado.ui;
 
+import poo.mercado.controller.GestorAlquilerPuesto;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -32,6 +33,7 @@ public class PantallaAlquilerDePuesto extends javax.swing.JFrame {
     /**
      * Creates new form PantallaAlquilerDePuesto
      * @param gestor
+     * @param empleado
      */
     public PantallaAlquilerDePuesto(GestorAlquilerPuesto gestor, Empleado empleado) {
         this.gestor = gestor;
@@ -401,7 +403,7 @@ public class PantallaAlquilerDePuesto extends javax.swing.JFrame {
         int generaContrato = JOptionPane.showConfirmDialog (null, "Desea registrar el Contrato?", "Confirmación", JOptionPane.YES_OPTION);
         if (generaContrato == JOptionPane.YES_OPTION) {
             // delegamos la generación de la factura al gestor
-            gestor.crearContratoAlquiler(obtenerPuestoSeleccionado(), txtFechaInicio.getText(), txtFechaVencimiento.getText(), cliente);
+            gestor.crearContratoAlquiler(obtenerPuestoSeleccionado(), cliente);
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 

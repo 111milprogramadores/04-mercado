@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.mercado.ui;
+package poo.mercado.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +24,7 @@ import poo.mercado.dao.DimensionesDao;
 import poo.mercado.dao.EstadosDao;
 import poo.mercado.dao.PuestosDao;
 import poo.mercado.dao.TiposPuestoDao;
+import poo.mercado.ui.PantallaAlquilerDePuesto;
 
 /**
  *
@@ -42,6 +43,8 @@ public class GestorAlquilerPuesto {
     
     private final SimpleDateFormat sdf;
     private final Sesion sesion;
+    
+    private Date fechaDesde, fechaHasta;
 
     public GestorAlquilerPuesto(TiposPuestoDao tiposPuestoDao, DimensionesDao dimensionesDao, PuestosDao puestosDao, ClientesDao clientesDao, ContratosDao contratosDao, EstadosDao estadosDao, Sesion sesion) {
         this.tiposPuestoDao = tiposPuestoDao;
@@ -72,11 +75,11 @@ public class GestorAlquilerPuesto {
     public void buscarPuestosDisponibles (String txtFechaInicio, String txtFechaVencimiento, TipoPuesto tipoPuesto, Dimension dimension) {
         // validamos las fechas
         try {
-            Date fechaInicio = sdf.parse(txtFechaInicio);
-            Date fechaVencimiento = sdf.parse(txtFechaVencimiento);
+            fechaDesde = sdf.parse(txtFechaInicio);
+            fechaHasta = sdf.parse(txtFechaVencimiento);
             
             // obtenemos los puestos disponibles
-            List<Puesto> puestos = puestosDao.buscarDisponiblesEnFechas(tipoPuesto, dimension, fechaInicio, fechaVencimiento);
+            List<Puesto> puestos = puestosDao.buscarDisponiblesEnFechas(tipoPuesto, dimension, fechaDesde, fechaHasta);
             
             // los mostramos en la tabla
             pantalla.mostrarPuestosDisponibles (puestos);
@@ -97,33 +100,24 @@ public class GestorAlquilerPuesto {
         pantalla.mostrarDatosCliente(cliente);
     }
     
-    public void crearContratoAlquiler (Puesto puesto, String txtFechaDesde, String txtFechaHasta, Cliente cliente) {
-        try {
-            // interpretamos las fechas de vigencia
-            Date fechaDesde = sdf.parse(txtFechaDesde);
-            Date fechaHasta = sdf.parse(txtFechaHasta);
-            
-            // consultamos el numero de proximo contrato
-            int numeroContrato = contratosDao.obtenerProximoNumero();
-            
-            // creamos el contrato
-            Contrato contrato = cliente.crearContrato (puesto, fechaDesde, fechaHasta, sesion, numeroContrato);
-            
-            // obtenemos el estado "Alquilado"
-            Estado alquilado = estadosDao.buscarPorNombre("Alquilado");
-            
-            // cambiamos el estado para el puesto
-            puesto.alquilar(alquilado);
-            
-            // guardamos el contrato
-            contratosDao.guardar(contrato);
-            
-            // mostramos el nro de contrato generado
-            pantalla.mostrarNumeroDeContrato(contrato);
-        }
-        catch (ParseException ex) {
-            // TODO mostrar mensaje de error de fecha invalida
-        }
+    public void crearContratoAlquiler (Puesto puesto, Cliente cliente) {
+        // consultamos el numero de proximo contrato
+        int numeroContrato = contratosDao.obtenerProximoNumero();
+
+        // creamos el contrato
+        Contrato contrato = cliente.crearContrato (puesto, fechaDesde, fechaHasta, sesion, numeroContrato);
+
+        // obtenemos el estado "Alquilado"
+        Estado alquilado = estadosDao.buscarPorNombre("Alquilado");
+
+        // cambiamos el estado para el puesto
+        puesto.alquilar(alquilado);
+
+        // guardamos el contrato
+        contratosDao.guardar(contrato);
+
+        // mostramos el nro de contrato generado
+        pantalla.mostrarNumeroDeContrato(contrato);
     }
     
 }

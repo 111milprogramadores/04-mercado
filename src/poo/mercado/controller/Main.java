@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package poo.mercado.ui;
+package poo.mercado.controller;
 
+import poo.mercado.controller.GestorAlquilerPuesto;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 import poo.mercado.Cliente;
 import poo.mercado.Contrato;
 import poo.mercado.Dimension;
-import poo.mercado.Empleado;
 import poo.mercado.Estado;
 import poo.mercado.Puesto;
 import poo.mercado.Sesion;

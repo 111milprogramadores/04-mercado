@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="poo.mercado.Cliente" table="Cliente">
+      <id name="cuit" column="cuit_cliente">
+          <generator class="assigned"/>
+      </id>
+      <property name="domicilio" />
+      <property name="razonSocial" column="razon_social" />
+      
+      <bag name="contratos" cascade="all" lazy="false">
+          <key column="cuit_cliente" not-null="true" />
+          <one-to-many class="poo.mercado.Contrato" />
+      </bag>
+  </class>
+</hibernate-mapping>

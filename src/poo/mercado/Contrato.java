@@ -13,6 +13,7 @@ import java.util.Date;
  * @author Candelaria
  */
 public class Contrato {
+    
     private Date fechaCancelacion;
     private Date fechaFinContrato;
     private Date fechaInicioContrato;
@@ -69,7 +70,6 @@ public class Contrato {
         this.puesto = puesto;
         this.ultimaLecturaMedidor = ultimaLecturaMedidor;
     }
-
     
     public Date getFechaCancelacion() {
         return fechaCancelacion;

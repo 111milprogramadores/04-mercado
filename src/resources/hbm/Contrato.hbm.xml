@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="poo.mercado.Contrato" table="Contrato">
+        <id name="numero">
+          <generator class="assigned"/>
+      </id>
+      <property name="montoMensual" column="monto_mensual" type="java.math.BigDecimal" />
+      
+      <property name="fechaInicioContrato" column="fecha_inicio_contrato" type="java.util.Date" />
+      <property name="fechaFinContrato" column="fecha_fin_contrato" type="java.util.Date" />
+      <property name="fechaCancelacion" column="fecha_cancelacion" type="java.util.Date" />
+      
+      <many-to-one name="responsableMercado" class="poo.mercado.Empleado" column="id_empleado" lazy="false" />
+      <many-to-one name="registro" class="poo.mercado.Sesion" column="id_sesion" lazy="false" />
+      <many-to-one name="puesto" class="poo.mercado.Puesto" column="id_puesto" lazy="false" />
+    </class>
+</hibernate-mapping>

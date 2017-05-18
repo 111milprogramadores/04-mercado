@@ -28,7 +28,7 @@ public class ClientesDaoImpl implements ClientesDao {
     }
 
     @Override
-    public Cliente buscarPorNombre(String nombre) {
+    public Cliente buscarPorRazonSocial(String nombre) {
         Cliente retorno = null;
         
         Iterator<Cliente> iter = clientes.iterator();

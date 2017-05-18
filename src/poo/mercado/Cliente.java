@@ -5,7 +5,6 @@
  */
 package poo.mercado;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +14,7 @@ import java.util.List;
  * @author Candelaria
  */
 public class Cliente {
+    
     private long cuit;
     private String domicilio;
     private String razonSocial;

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="poo.mercado.Empleado" table="Empleado">
+        <id name="id" column="id_empleado">
+          <generator class="increment"/>
+      </id>
+      <property name="apellido" />
+      <property name="dni" />
+      <property name="fechaIngreso" column="fecha_ingreso" type="java.util.Date" />
+      <property name="legajo" />
+      <property name="nombre" />
+      <property name="nombreUsuario" column="nombre_usuario" />
+      <property name="password" />
+    </class>
+</hibernate-mapping>

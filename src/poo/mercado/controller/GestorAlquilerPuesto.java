@@ -90,7 +90,7 @@ public class GestorAlquilerPuesto {
     }
 
     public void buscarClientePorNombre(String nombre) {
-        Cliente cliente = clientesDao.buscarPorNombre(nombre);
+        Cliente cliente = clientesDao.buscarPorRazonSocial(nombre);
         
         if (cliente == null) {
             JOptionPane.showMessageDialog(pantalla, "Cliente no encontrado...");
@@ -111,9 +111,12 @@ public class GestorAlquilerPuesto {
 
         // cambiamos el estado para el puesto
         puesto.alquilar(alquilado);
+        
+        // guardamos el puesto
+        puestosDao.guardar(puesto);
 
         // guardamos el contrato
-        contratosDao.guardar(contrato);
+        clientesDao.guardar(cliente);
 
         // mostramos el nro de contrato generado
         pantalla.mostrarNumeroDeContrato(contrato);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="poo.mercado.Puesto" table="Puesto">
+      <id name="id" column="id_puesto">
+          <generator class="increment"/>
+      </id>
+      <property name="numero" />
+      
+      <bag name="lecturas" cascade="all" lazy="false" order-by="">
+          <key column="id_puesto" not-null="true" />
+          <one-to-many class="poo.mercado.Lectura" />
+      </bag>
+      
+      <many-to-one name="estado" class="poo.mercado.Estado" column="id_estado" lazy="false" />
+      
+      <bag name="preciosAlquiler" cascade="all" lazy="false">
+          <key column="id_puesto" not-null="true" />
+          <one-to-many class="poo.mercado.PrecioAlquiler" />
+      </bag>
+  </class>
+</hibernate-mapping>

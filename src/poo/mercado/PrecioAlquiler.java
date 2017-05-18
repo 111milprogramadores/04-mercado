@@ -14,6 +14,8 @@ import java.util.Date;
  * @author Candelaria
  */
 public class PrecioAlquiler {
+    
+    private Integer id;
     private Date fechaVigencia;
     private BigDecimal precio;
     private Sector sector;
@@ -50,6 +52,14 @@ public class PrecioAlquiler {
         this.sector = sector;
         this.dimension = dimension;
         this.tipoPuesto = tipoPuesto;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
     
     public Date getFechaVigencia() {

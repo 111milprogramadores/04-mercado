@@ -10,6 +10,8 @@ package poo.mercado;
  * @author Candelaria
  */
 public class Estado {
+    
+    private Integer id;
     private String descripcion;
     private String nombre;
 
@@ -27,6 +29,14 @@ public class Estado {
     public Estado(String descripcion, String nombre) {
         this.descripcion = descripcion;
         this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescripcion() {
@@ -52,4 +62,10 @@ public class Estado {
     boolean esAlquilado() {
         return nombre.equals("Alquilado");
     }
+
+    @Override
+    public String toString() {
+        return this.nombre;
+    }
+    
 }

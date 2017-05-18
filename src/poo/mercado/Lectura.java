@@ -12,6 +12,8 @@ import java.util.Date;
  * @author Candelaria
  */
 public class Lectura {
+    
+    private Integer id;
     private String lectura;
     private Date fechaCaptura;
 
@@ -29,6 +31,14 @@ public class Lectura {
     public Lectura(String lectura, Date fechaCaptura) {
         this.lectura = lectura;
         this.fechaCaptura = fechaCaptura;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getLectura() {

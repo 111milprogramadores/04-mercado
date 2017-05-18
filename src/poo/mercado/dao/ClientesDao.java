@@ -15,6 +15,6 @@ public interface ClientesDao {
     
     public void guardar (Cliente cliente);
     
-    public Cliente buscarPorNombre (String nombre);
+    public Cliente buscarPorRazonSocial (String nombre);
     
 }

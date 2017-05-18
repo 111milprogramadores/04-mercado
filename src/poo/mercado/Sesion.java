@@ -12,6 +12,8 @@ import java.util.Date;
  * @author Candelaria
  */
 public class Sesion {
+    
+    private Integer id;
     private Date fechaHoraFin;
     private Date fechaHoraInicio;
     private Empleado empleado;
@@ -32,6 +34,14 @@ public class Sesion {
         this.fechaHoraFin = fechaHoraFin;
         this.fechaHoraInicio = fechaHoraInicio;
         this.empleado = empleado;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Date getFechaHoraFin() {

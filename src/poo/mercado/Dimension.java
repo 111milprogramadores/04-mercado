@@ -10,6 +10,8 @@ package poo.mercado;
  * @author Candelaria
  */
 public class Dimension {
+    
+    private Integer id;
     private float ancho;
     private float largo;
     private String nombre;
@@ -30,6 +32,14 @@ public class Dimension {
         this.ancho = ancho;
         this.largo = largo;
         this.nombre = nombre;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public float getAncho() {

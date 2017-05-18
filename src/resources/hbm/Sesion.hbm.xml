@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="poo.mercado.Sesion" table="Sesion">
+        <id name="id" column="id_sesion">
+          <generator class="increment"/>
+      </id>
+      <property name="fechaHoraInicio" column="fecha_hora_inicio" type="java.util.Date" />
+      <property name="fechaHoraFin" column="fecha_hora_fin" type="java.util.Date" />
+
+      <many-to-one name="empleado" class="poo.mercado.Empleado" column="id_empleado" lazy="false" />
+    </class>
+</hibernate-mapping>

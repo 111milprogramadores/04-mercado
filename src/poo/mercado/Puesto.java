@@ -16,6 +16,8 @@ import java.util.List;
  * @author Candelaria
  */
 public class Puesto {
+    
+    private Integer id;
     private int numero;
     private List<Lectura> lecturas;
     private Estado estado;
@@ -41,6 +43,14 @@ public class Puesto {
         this.lecturas = lecturas;
         this.estado = estado;
         this.preciosAlquiler = preciosAlquiler;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getNumero() {

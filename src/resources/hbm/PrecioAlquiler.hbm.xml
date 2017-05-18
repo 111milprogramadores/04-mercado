@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="poo.mercado.PrecioAlquiler" table="PrecioAlquiler">
+      <id name="id" column="id_precio_alquiler">
+          <generator class="increment"/>
+      </id>
+      <property name="precio" type="java.math.BigDecimal" />
+      <property name="fechaVigencia" column="fecha_vigencia" type="java.util.Date" />
+      
+      <many-to-one name="sector" class="poo.mercado.Sector" column="id_sector" lazy="false" />
+      <many-to-one name="dimension" class="poo.mercado.Dimension" column="id_dimension" lazy="false" />
+      <many-to-one name="tipoPuesto" class="poo.mercado.TipoPuesto" column="id_tipo_puesto" lazy="false" />
+  </class>
+</hibernate-mapping>

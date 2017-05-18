@@ -16,7 +16,7 @@ import poo.mercado.Puesto;
  */
 public class TablaPuestosDisponiblesModel extends AbstractTableModel {
     
-    private static final String[] COLUMNAS = { "Nro.", "Sector", "Superficie", "Alquiler" };
+    private static final String[] COLUMNAS = { "Nro.", "Sector", "Superficie", "Alquiler", "Estado" };
     
     private List<Puesto> puestos;
 
@@ -37,7 +37,7 @@ public class TablaPuestosDisponiblesModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return COLUMNAS.length;
     }
 
     @Override
@@ -58,6 +58,9 @@ public class TablaPuestosDisponiblesModel extends AbstractTableModel {
                 break;
             case 3:
                 retorno = puesto.obtenerPrecioVigente().getPrecio();
+                break;
+            case 4:
+                retorno = puesto.getEstado();
                 break;
         }
         

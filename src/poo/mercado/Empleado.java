@@ -12,6 +12,8 @@ import java.util.Date;
  * @author Candelaria
  */
 public class Empleado {
+    
+    private Integer id;
     private String apellido;
     private int dni;
     private Date fechaIngreso;
@@ -44,6 +46,14 @@ public class Empleado {
         this.nombre = nombre;
         this.nombreUsuario = nombreUsuario;
         this.password = password;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getApellido() {

@@ -52,9 +52,6 @@ public class PuestosDaoHibernateImpl implements PuestosDao {
     public List<Puesto> buscarDisponiblesEnFechas(TipoPuesto tipoPuesto, Dimension dimension, Date fechaDesde, Date fechaHasta) {
         Session session = sessionFactory.openSession();
         
-        // obtenemos el estado disponible
-        Estado disponible = estadosDao.buscarPorNombre("Disponible");
-        
         // comenzamos el armado de la criteria
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Puesto> criteria = builder.createQuery(Puesto.class);
@@ -71,9 +68,6 @@ public class PuestosDaoHibernateImpl implements PuestosDao {
             builder.equal(precios.get("tipoPuesto"), tipoPuesto),
             builder.equal(precios.get("dimension"), dimension)
         );
-        
-        // debe estar actualmente disponible o...
-        Predicate estaDisponible = builder.equal(root.get("estado"), disponible);
         
         // ...no tener un contrato que colisione con las fechas
         Subquery<Contrato> subquery = criteria.subquery(Contrato.class);
@@ -100,9 +94,7 @@ public class PuestosDaoHibernateImpl implements PuestosDao {
         // puesto y dimension seleccionados y que, o bien esté disponible o no
         // existan contratos que cubran fechaDesde o fechaHasta
         criteria.where(
-            builder.and(mismoPuestoDimension, 
-                builder.or(estaDisponible, builder.not(builder.exists(subquery)))
-            )
+            builder.and(mismoPuestoDimension, builder.not(builder.exists(subquery)))
         );
         
         // creamos una query tipada para asignarle parametros (fechaDesde y fechaHasta)

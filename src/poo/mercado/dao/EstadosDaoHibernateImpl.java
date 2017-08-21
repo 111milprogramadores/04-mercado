@@ -5,6 +5,7 @@
  */
 package poo.mercado.dao;
 
+import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -49,4 +50,14 @@ public class EstadosDaoHibernateImpl implements EstadosDao {
         
         return estado;
     }
+
+    @Override
+    public List<Estado> obtenerTodos() {
+        Session session = sessionFactory.openSession();
+        List<Estado> retorno = session.createQuery("from Estado").list();
+        session.close();
+        
+        return retorno;
+    }
+    
 }

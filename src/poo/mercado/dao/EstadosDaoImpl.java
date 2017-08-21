@@ -43,5 +43,10 @@ public class EstadosDaoImpl implements EstadosDao {
         
         return encontrado;
     }
+
+    @Override
+    public List<Estado> obtenerTodos() {
+        return this.estados;
+    }
     
 }

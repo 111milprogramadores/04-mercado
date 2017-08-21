@@ -5,6 +5,7 @@
  */
 package poo.mercado.dao;
 
+import java.util.List;
 import poo.mercado.Estado;
 
 /**
@@ -16,5 +17,7 @@ public interface EstadosDao {
     public void guardar (Estado estado);
     
     public Estado buscarPorNombre (String nombre);
+
+    public List<Estado> obtenerTodos();
     
 }

@@ -78,12 +78,6 @@ public class Main {
         Calendar hoy = Calendar.getInstance();
         
         // creamos las instancias de capa DAO
-        TiposPuestoDao tiposPuestoDao = new TiposPuestoDaoHibernateImpl(sessionFactory);
-        DimensionesDao dimensionesDao = new DimensionesDaoHibernateImpl(sessionFactory);
-        EstadosDao estadosDao = new EstadosDaoHibernateImpl(sessionFactory);
-        PuestosDao puestosDao = new PuestosDaoHibernateImpl(sessionFactory, estadosDao);
-        ClientesDao clientesDao = new ClientesDaoHibernateImpl(sessionFactory);
-        ContratosDao contratosDao = new ContratosDaoHibernateImpl(sessionFactory);
         EmpleadosDao empleadosDao = new EmpleadosDaoHibernateImpl(sessionFactory);
         
         // simulamos el inicio de sesion de un empleado
@@ -92,7 +86,7 @@ public class Main {
         new SesionesDaoHibernateImpl(sessionFactory).guardar(sesion);
         
         // inicializamos el caso de uso
-        new GestorAlquilerPuesto(tiposPuestoDao, dimensionesDao, puestosDao, clientesDao, contratosDao, estadosDao, sesion).run();
+        new GestorAlquilerPuesto(sessionFactory, sesion).run();
     }
     
 }

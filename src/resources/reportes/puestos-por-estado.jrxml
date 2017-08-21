@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.0.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="puestos-por-estado" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5e74bb4-278a-4290-8971-13471fcb4ef0">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="poo-mercado"/>
+	<parameter name="idsTiposPuesto" class="java.util.List" nestedType="java.lang.Integer">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="idsEstados" class="java.util.List" nestedType="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[select tp.nombre as "tipo", d.nombre as "dimension", s.nombre as "sector", p.numero, e.nombre as "estado"
+from PrecioAlquiler pa
+join Puesto p on p.id_puesto = pa.id_puesto
+join TipoPuesto tp on tp.id_tipo_puesto = pa.id_tipo_puesto
+join Dimension d on pa.id_dimension = d.id_dimension
+join Sector s on pa.id_sector = s.id_sector
+join Estado e on p.id_estado = e.id_estado
+where 
+  $X{IN, p.id_estado, idsEstados} and
+  $X{IN, pa.id_tipo_puesto, idsTiposPuesto}
+group by 1, 2, 3, 4]]>
+	</queryString>
+	<field name="tipo" class="java.lang.String"/>
+	<field name="dimension" class="java.lang.String"/>
+	<field name="sector" class="java.lang.String"/>
+	<field name="numero" class="java.lang.Integer"/>
+	<field name="estado" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="30" width="534" height="30" uuid="f8ef8449-28b2-4f1f-9455-79fc4f11d7fd"/>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte de Puestos por Estado]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15" uuid="517a5a91-83e4-4e27-bed8-d2dabb8fbca6">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo de Puesto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="15" uuid="9ab8eda3-5842-4989-a98b-44cf985c6050"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dimensión]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="15" uuid="5d6768a3-0286-4e5f-bd3f-615d77a42804"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sector]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="15" uuid="e19b9b4c-5844-4bfb-821a-75d16bf949a2"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="15" uuid="65f3e021-0b9b-4aaf-a9d1-d9314b9ea615"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="15" uuid="969c09c5-3792-4a0a-9a26-0938c1594166">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="15" uuid="2a09cbb9-b209-4337-b541-c87fb00b4ca6"/>
+				<textFieldExpression><![CDATA[$F{dimension}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="15" uuid="677dfc7b-57af-4e82-baa8-255debd073a8"/>
+				<textFieldExpression><![CDATA[$F{sector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="15" uuid="f3aef23b-8f6e-4dfe-80fc-8aad10e9611f"/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="15" uuid="912c6936-5c15-4e3d-9498-6bd486f3387c"/>
+				<textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

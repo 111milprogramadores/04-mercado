@@ -7,7 +7,6 @@ package poo.mercado.dao;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import poo.mercado.Puesto;
 import poo.mercado.Sector;
 
 /**
